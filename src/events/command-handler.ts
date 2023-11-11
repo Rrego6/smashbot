@@ -26,7 +26,7 @@ export class CommandHandler implements EventHandler {
         Config.rateLimiting.commands.interval * 1000
     );
 
-    constructor(public commands: Command[], private eventDataService: EventDataService) {}
+    constructor(public commands: Command[], private eventDataService: EventDataService) { }
 
     public async process(intr: CommandInteraction | AutocompleteInteraction): Promise<void> {
         // Don't respond to self, or other bots
@@ -34,13 +34,15 @@ export class CommandHandler implements EventHandler {
             return;
         }
 
+        // do some validation of bot status here before handling command?
+
         let commandParts =
             intr instanceof ChatInputCommandInteraction || intr instanceof AutocompleteInteraction
                 ? [
-                      intr.commandName,
-                      intr.options.getSubcommandGroup(false),
-                      intr.options.getSubcommand(false),
-                  ].filter(Boolean)
+                    intr.commandName,
+                    intr.options.getSubcommandGroup(false),
+                    intr.options.getSubcommand(false),
+                ].filter(Boolean)
                 : [intr.commandName];
         let commandName = commandParts.join(' ');
 
@@ -78,21 +80,21 @@ export class CommandHandler implements EventHandler {
                         intr.channel instanceof NewsChannel ||
                         intr.channel instanceof ThreadChannel
                         ? Logs.error.autocompleteGuild
-                              .replaceAll('{INTERACTION_ID}', intr.id)
-                              .replaceAll('{OPTION_NAME}', commandName)
-                              .replaceAll('{COMMAND_NAME}', commandName)
-                              .replaceAll('{USER_TAG}', intr.user.tag)
-                              .replaceAll('{USER_ID}', intr.user.id)
-                              .replaceAll('{CHANNEL_NAME}', intr.channel.name)
-                              .replaceAll('{CHANNEL_ID}', intr.channel.id)
-                              .replaceAll('{GUILD_NAME}', intr.guild?.name)
-                              .replaceAll('{GUILD_ID}', intr.guild?.id)
+                            .replaceAll('{INTERACTION_ID}', intr.id)
+                            .replaceAll('{OPTION_NAME}', commandName)
+                            .replaceAll('{COMMAND_NAME}', commandName)
+                            .replaceAll('{USER_TAG}', intr.user.tag)
+                            .replaceAll('{USER_ID}', intr.user.id)
+                            .replaceAll('{CHANNEL_NAME}', intr.channel.name)
+                            .replaceAll('{CHANNEL_ID}', intr.channel.id)
+                            .replaceAll('{GUILD_NAME}', intr.guild?.name)
+                            .replaceAll('{GUILD_ID}', intr.guild?.id)
                         : Logs.error.autocompleteOther
-                              .replaceAll('{INTERACTION_ID}', intr.id)
-                              .replaceAll('{OPTION_NAME}', commandName)
-                              .replaceAll('{COMMAND_NAME}', commandName)
-                              .replaceAll('{USER_TAG}', intr.user.tag)
-                              .replaceAll('{USER_ID}', intr.user.id),
+                            .replaceAll('{INTERACTION_ID}', intr.id)
+                            .replaceAll('{OPTION_NAME}', commandName)
+                            .replaceAll('{COMMAND_NAME}', commandName)
+                            .replaceAll('{USER_TAG}', intr.user.tag)
+                            .replaceAll('{USER_ID}', intr.user.id),
                     error
                 );
             }
@@ -147,19 +149,19 @@ export class CommandHandler implements EventHandler {
                     intr.channel instanceof NewsChannel ||
                     intr.channel instanceof ThreadChannel
                     ? Logs.error.commandGuild
-                          .replaceAll('{INTERACTION_ID}', intr.id)
-                          .replaceAll('{COMMAND_NAME}', commandName)
-                          .replaceAll('{USER_TAG}', intr.user.tag)
-                          .replaceAll('{USER_ID}', intr.user.id)
-                          .replaceAll('{CHANNEL_NAME}', intr.channel.name)
-                          .replaceAll('{CHANNEL_ID}', intr.channel.id)
-                          .replaceAll('{GUILD_NAME}', intr.guild?.name)
-                          .replaceAll('{GUILD_ID}', intr.guild?.id)
+                        .replaceAll('{INTERACTION_ID}', intr.id)
+                        .replaceAll('{COMMAND_NAME}', commandName)
+                        .replaceAll('{USER_TAG}', intr.user.tag)
+                        .replaceAll('{USER_ID}', intr.user.id)
+                        .replaceAll('{CHANNEL_NAME}', intr.channel.name)
+                        .replaceAll('{CHANNEL_ID}', intr.channel.id)
+                        .replaceAll('{GUILD_NAME}', intr.guild?.name)
+                        .replaceAll('{GUILD_ID}', intr.guild?.id)
                     : Logs.error.commandOther
-                          .replaceAll('{INTERACTION_ID}', intr.id)
-                          .replaceAll('{COMMAND_NAME}', commandName)
-                          .replaceAll('{USER_TAG}', intr.user.tag)
-                          .replaceAll('{USER_ID}', intr.user.id),
+                        .replaceAll('{INTERACTION_ID}', intr.id)
+                        .replaceAll('{COMMAND_NAME}', commandName)
+                        .replaceAll('{USER_TAG}', intr.user.tag)
+                        .replaceAll('{USER_ID}', intr.user.id),
                 error
             );
         }

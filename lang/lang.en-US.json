@@ -192,10 +192,14 @@
             "dev": "dev",
             "help": "help",
             "info": "info",
-            "test": "test"
+            "test": "test",
+            "tag": "tag",
+            "main": "main"
+
         },
         "userCommands": {
-            "viewDateJoined": "View Date Joined"
+            "viewDateJoined": "View Date Joined",
+            "getSlippiTag": "Get user's Slippi Tag"
         },
         "messageCommands": {
             "viewDateSent": "View Date Sent"
@@ -205,6 +209,7 @@
             "option": "option"
         },
         "commandDescs": {
+            "tag": "Set Slippi Tag",
             "dev": "Developer use only.",
             "help": "Find help or contact support.",
             "info": "View bot info.",

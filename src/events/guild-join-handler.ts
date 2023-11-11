@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 let Logs = require('../../lang/logs.json');
 
 export class GuildJoinHandler implements EventHandler {
-    constructor(private eventDataService: EventDataService) {}
+    constructor(private eventDataService: EventDataService) { }
 
     public async process(guild: Guild): Promise<void> {
         Logger.info(
@@ -27,6 +27,7 @@ export class GuildJoinHandler implements EventHandler {
             guild,
         });
 
+        return;
         // Send welcome message to the server's notify channel
         let notifyChannel = await ClientUtils.findNotifyChannel(guild, data.langGuild);
         if (notifyChannel) {

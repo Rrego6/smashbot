@@ -15,7 +15,7 @@ let Config = require('../../config/config.json');
 let Logs = require('../../lang/logs.json');
 
 export class CommandRegistrationService {
-    constructor(private rest: REST) {}
+    constructor(private rest: REST) { }
 
     public async process(
         localCmds: RESTPostAPIApplicationCommandsJSONBody[],

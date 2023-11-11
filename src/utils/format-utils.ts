@@ -23,6 +23,10 @@ export class FormatUtils {
         return `<@!${discordId}>`;
     }
 
+    public static emoji(emojiName: string, emojiId: string): string {
+        return `<:${emojiName}:${emojiId}>`
+    }
+
     // TODO: Replace with ApplicationCommand#toString() once discord.js #8818 is merged
     // https://github.com/discordjs/discord.js/pull/8818
     public static commandMention(command: ApplicationCommand, subParts: string[] = []): string {
@@ -52,6 +56,6 @@ export class FormatUtils {
     }
 
     public static fileSize(bytes: number): string {
-        return filesize(bytes, { output: 'string', pad: true, round: 2 }) as string;
+        return filesize(bytes, { output: 'string', pad: true, round: 2 });
     }
 }

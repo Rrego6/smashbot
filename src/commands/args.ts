@@ -3,8 +3,18 @@ import { APIApplicationCommandBasicOption, ApplicationCommandOptionType } from '
 import { DevCommandName, HelpOption, InfoOption } from '../enums/index.js';
 import { Language } from '../models/enum-helpers/index.js';
 import { Lang } from '../services/index.js';
+import { SmashCharacters } from '../constants/smash-mains.js';
 
 export class Args {
+    public static readonly MAIN_CHARACTER_OPTIONS: APIApplicationCommandBasicOption = {
+        name: "character",
+        description: "Set your main character. Run this command again to set main characters.",
+        type: ApplicationCommandOptionType.String,
+        choices: SmashCharacters.map(character => {
+            return { name: character, value: character }
+        })
+    }
+
     public static readonly DEV_COMMAND: APIApplicationCommandBasicOption = {
         name: Lang.getRef('arguments.command', Language.Default),
         name_localizations: Lang.getRefLocalizationMap('arguments.command'),
@@ -16,6 +26,25 @@ export class Args {
                 name: Lang.getRef('devCommandNames.info', Language.Default),
                 name_localizations: Lang.getRefLocalizationMap('devCommandNames.info'),
                 value: DevCommandName.INFO,
+            },
+        ],
+    };
+    public static readonly SELECT_MAIN_OPTION: APIApplicationCommandBasicOption = {
+        name: Lang.getRef('arguments.option', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.option'),
+        description: Lang.getRef('argDescs.helpOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.helpOption'),
+        type: ApplicationCommandOptionType.String,
+        choices: [
+            {
+                name: Lang.getRef('helpOptionDescs.contactSupport', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('helpOptionDescs.contactSupport'),
+                value: HelpOption.CONTACT_SUPPORT,
+            },
+            {
+                name: Lang.getRef('helpOptionDescs.commands', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('helpOptionDescs.commands'),
+                value: HelpOption.COMMANDS,
             },
         ],
     };

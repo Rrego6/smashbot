@@ -1,17 +1,16 @@
 import { REST } from '@discordjs/rest';
-import { Options, Partials } from 'discord.js';
 import { createRequire } from 'node:module';
 
 import { Button } from './buttons/index.js';
-import { DevCommand, HelpCommand, InfoCommand, TestCommand } from './commands/chat/index.js';
+import { HelpCommand, InfoCommand, TestCommand } from './commands/chat/index.js';
+import { SetMainCommand } from './commands/chat/set-main-command.js';
+import { SetTagCommand } from './commands/chat/set-tag-command.js';
 import {
     ChatCommandMetadata,
     Command,
     MessageCommandMetadata,
     UserCommandMetadata,
 } from './commands/index.js';
-import { ViewDateSent } from './commands/message/index.js';
-import { ViewDateJoined } from './commands/user/index.js';
 import {
     ButtonHandler,
     CommandHandler,
@@ -32,6 +31,10 @@ import {
     Logger,
 } from './services/index.js';
 import { Trigger } from './triggers/index.js';
+import { GetSlippiTagCommand } from './commands/user/get-slippi-tag-command.js';
+
+
+
 
 const require = createRequire(import.meta.url);
 let Config = require('../config/config.json');
@@ -44,28 +47,21 @@ async function start(): Promise<void> {
     // Client
     let client = new CustomClient({
         intents: Config.client.intents,
-        partials: (Config.client.partials as string[]).map(partial => Partials[partial]),
-        makeCache: Options.cacheWithLimits({
-            // Keep default caching behavior
-            ...Options.DefaultMakeCacheSettings,
-            // Override specific options from config
-            ...Config.client.caches,
-        }),
     });
+
+
 
     // Commands
     let commands: Command[] = [
         // Chat Commands
-        new DevCommand(),
         new HelpCommand(),
         new InfoCommand(),
         new TestCommand(),
-
-        // Message Context Commands
-        new ViewDateSent(),
+        new SetMainCommand(),
+        new SetTagCommand(),
 
         // User Context Commands
-        new ViewDateJoined(),
+        new GetSlippiTagCommand()
 
         // TODO: Add new commands here
     ];
