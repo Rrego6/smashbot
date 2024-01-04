@@ -11,6 +11,7 @@ import {
     MessageCommandMetadata,
     UserCommandMetadata,
 } from './commands/index.js';
+import { GetSlippiTagCommand } from './commands/user/get-slippi-tag-command.js';
 import {
     ButtonHandler,
     CommandHandler,
@@ -31,7 +32,6 @@ import {
     Logger,
 } from './services/index.js';
 import { Trigger } from './triggers/index.js';
-import { GetSlippiTagCommand } from './commands/user/get-slippi-tag-command.js';
 
 
 

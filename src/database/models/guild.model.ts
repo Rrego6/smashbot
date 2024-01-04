@@ -11,6 +11,11 @@ export class Guild extends Model {
     @Unique
     @AllowNull(true)
     @Column
+    bot_info_channel_id: string;
+
+    @Unique
+    @AllowNull(true)
+    @Column
     pinned_channel_id: string;
 
 

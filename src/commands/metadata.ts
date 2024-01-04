@@ -9,9 +9,6 @@ import {
     RESTPostAPIContextMenuApplicationCommandsJSONBody,
 } from 'discord.js';
 
-import { Language } from '../models/enum-helpers/index.js';
-import { Lang } from '../services/index.js';
-
 export const ChatCommandMetadata: {
     [command: string]: RESTPostAPIChatInputApplicationCommandsJSONBody;
 } = {
@@ -43,13 +40,6 @@ export const ChatCommandMetadata: {
 export const MessageCommandMetadata: {
     [command: string]: RESTPostAPIContextMenuApplicationCommandsJSONBody;
 } = {
-    VIEW_DATE_SENT: {
-        type: ApplicationCommandType.Message,
-        name: Lang.getRef('messageCommands.viewDateSent', Language.Default),
-        name_localizations: Lang.getRefLocalizationMap('messageCommands.viewDateSent'),
-        default_member_permissions: undefined,
-        dm_permission: true
-    },
 };
 
 export const UserCommandMetadata: {
@@ -57,7 +47,7 @@ export const UserCommandMetadata: {
 } = {
     GET_SLIPPI_TAG: {
         type: ApplicationCommandType.User,
-        name: "Get Slippi Tag",
+        name: 'Get Slippi Tag',
         default_member_permissions: undefined,
         dm_permission: true
     }

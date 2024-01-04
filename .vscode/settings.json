@@ -38,6 +38,10 @@
         "respawn",
         "respawned",
         "restjson",
+        "setmain",
+        "settag",
+        "Slippi",
+        "smashbot",
         "unescapes",
         "varchar"
     ],
