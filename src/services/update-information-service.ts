@@ -91,7 +91,8 @@ export class UpdateInformation {
         }
 
         //Code to add only first character as role
-        const roleToAdd = newMainCharRoleNames.find(_ => true);
+        const newMainChar = newMainCharRoleNames.find(_ => true);
+        const roleToAdd = intr.guild.roles.cache.find(role => role.name === newMainChar)
         intr.guild.members.addRole({ user: intr.user, role: roleToAdd })
         await new Promise(resolve => setTimeout(resolve, 500));
 
