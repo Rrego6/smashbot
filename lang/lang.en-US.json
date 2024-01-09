@@ -143,6 +143,10 @@
                     "Required permissions: {{PERMISSIONS}}"
                 ],
                 "color": "{{COM:colors.warning}}"
+            },
+            "invalidSlippiTag": {
+                "description": "Tag did not match format: tagname#123. Try running command again.",
+                "color": "{{COM:colors.warning}}"
             }
         },
         "errorEmbeds": {
@@ -195,7 +199,6 @@
             "test": "test",
             "tag": "tag",
             "main": "main"
-
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined",

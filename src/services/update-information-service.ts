@@ -90,7 +90,13 @@ export class UpdateInformation {
             await new Promise(resolve => setTimeout(resolve, 500));
         }
 
+        //Code to add only first character as role
+        const roleToAdd = newMainCharRoleNames.find(_ => true);
+        intr.guild.members.addRole({ user: intr.user, role: roleToAdd })
+        await new Promise(resolve => setTimeout(resolve, 500));
 
+        //Code to add all characters as roles
+        /**
         for (const newMainChar of newMainCharRoleNames) {
             const roleToAdd = intr.guild.roles.cache.find(role => role.name === newMainChar)
 
@@ -98,7 +104,7 @@ export class UpdateInformation {
             intr.guild.members.addRole({ user: intr.user, role: roleToAdd })
             await new Promise(resolve => setTimeout(resolve, 500));
         }
-
+        */
         await UpdateInformation.UpdateUserTableWithMainCharacters(member.id, intr.guildId, mainCharSelValues);
         await UpdateInformation.UpdateDirectoryPost(intr.guild);
 
@@ -205,7 +211,7 @@ export class UpdateInformation {
         const currentMainCharRoles = guild.roles.cache.map(role => role).filter(role => SmashCharacters.includes(role.name));
         //todo upload roles if they don't exist
 
-        if (currentMainCharRoles.some(role => role.position < botRole.position)) {
+        if (currentMainCharRoles.some(role => role.rawPosition > botRole.rawPosition)) {
             const infoChannel = guild.channels.cache.find(channel => channel.name === BOT_INFO_CHANNEL_NAME) as TextChannel;
             const message =
                 `@everyone The bot currently has an invalid role position that must be fixed. BOT WILL NOT WORK TILL THIS IS FIXED!
@@ -213,7 +219,7 @@ export class UpdateInformation {
 To fix:
 1. Go to Server Settings
 2. Go to Roles
-3. Drag the ${FormatUtils.roleMention(guild, botRole.id)} role to the top (or at least above all the smash character roles)}
+3. Drag the ${FormatUtils.roleMention(guild, botRole.id)} role to the top (or at least above all the smash character roles)
 `;
             await infoChannel.send(message);
 
